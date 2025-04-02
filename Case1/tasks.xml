@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TaskList>
+	<Task>
+		<Name>Make coffee</Name>
+		<AssignedUsers>
+			<User>2</User>
+		</AssignedUsers>
+		<Description>You know how we do it!</Description>
+		<Status>ToDo</Status>
+	</Task>
+</TaskList>

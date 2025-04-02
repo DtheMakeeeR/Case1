@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<UserList>
+	<User>
+		<UserName>Root</UserName>
+		<Password>Root</Password>
+		<Role>Administrator</Role>
+	</User>
+	<User>
+		<UserName>Иван</UserName>
+		<Password>12345</Password>
+		<Role>Worker</Role>
+	</User>
+</UserList>
