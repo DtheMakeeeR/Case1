@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.IO;
+using System.Reflection;
 
 namespace Case1
 {
@@ -13,7 +14,13 @@ namespace Case1
     {
         static void Main(string[] args)
         {
-            ProjectSystem ps = new ProjectSystem("users.xml", "tasks.xml");
+            string uPath = "users.xml", tPath = "tasks.xml";
+            if (args.Length >= 2) 
+            {
+                uPath = args[0];
+                tPath = args[1];
+            }
+            ProjectSystem ps = new ProjectSystem(uPath, tPath);
             ps.Start();
         }
     }

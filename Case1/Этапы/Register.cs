@@ -13,8 +13,9 @@ namespace Case1
         public IAppStep Run()
         {
             Console.Clear();
-            Console.Write("Введите логин и пароль\nЛогин:");
+            Console.Write("Введите логин и пароль\n(q/Q для завершения работы)\nЛогин:");
             string login = Console.ReadLine();
+            if (login.Equals("Q", StringComparison.OrdinalIgnoreCase)) return null;
             StringBuilder password = new StringBuilder();
             Console.Write("Пароль:");
             while (true)

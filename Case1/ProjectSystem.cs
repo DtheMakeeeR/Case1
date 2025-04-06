@@ -12,8 +12,8 @@ namespace Case1
 {
     internal class ProjectSystem
     {
-        private List<Task> tasksList;
-        private List<User> usersList;
+        private List<Task> tasksList = null;
+        private List<User> usersList = null;
         private string userPath;
         private string taskPath;
 
@@ -29,36 +29,52 @@ namespace Case1
         }
         public void SaveUsers()
         {
+            string tempPath = Path.GetTempFileName();
             XmlSerializer serializer = new XmlSerializer(typeof(UserList));
             try
             {
-                using (FileStream stream = new FileStream(userPath, FileMode.Create, FileAccess.Write))
+                using (FileStream stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
                 {
                     UserList uList = new UserList { Users = Users };
                     serializer.Serialize(stream, uList);
                 }
+                File.Copy(tempPath, userPath, true);
             }
-            catch(Exception ex)
+            catch
             {
-                ErrorMessage(ex.Message);
-                SaveUsers();
+                ErrorMessage($"Нет файла {userPath}. ");
+            }
+            finally
+            {
+                if (File.Exists(tempPath))
+                {
+                    File.Delete(tempPath);
+                }
             }
         }
         public void SaveTasks()
         {
+            string tempPath = Path.GetTempFileName();
             XmlSerializer serializer = new XmlSerializer(typeof(TaskList));
             try
             {
-                using (FileStream stream = new FileStream(taskPath, FileMode.Create, FileAccess.Write))
+                using (FileStream stream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
                 {
                     TaskList taskList = new TaskList { Tasks = Tasks };
                     serializer.Serialize(stream, taskList);
                 }
+                File.Copy(tempPath, taskPath, true);
             }
-            catch(Exception ex)
+            catch
             {
-                ErrorMessage(ex.Message);
-                SaveTasks();
+                ErrorMessage($"Нет файла {taskPath}. ");
+            }
+            finally
+            {
+                if (File.Exists(tempPath))
+                {
+                    File.Delete(tempPath);
+                }
             }
         }
         public void LoadUsers()
@@ -71,10 +87,9 @@ namespace Case1
                     usersList = ((UserList)serializer.Deserialize(stream)).Users;
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                ErrorMessage(ex.Message);
-                LoadUsers();
+                ErrorMessage($"Нет файла {userPath}. ");
             }
         }
         public void LoadTasks()
@@ -87,10 +102,9 @@ namespace Case1
                     tasksList = ((TaskList)serializer.Deserialize(stream)).Tasks;
                 }
             }
-            catch( Exception ex)
+            catch
             {
-                ErrorMessage(ex.Message);
-                LoadTasks();
+                ErrorMessage($"Нет файла {taskPath}. ");
             }
         }
         public void AssingUser(int index, string uName)
@@ -120,6 +134,11 @@ namespace Case1
 
         public void Start()
         {
+            if (usersList == null || tasksList == null)
+            {
+                ErrorMessage("Завершение работы");
+                return;
+            }
             IAppStep currentStep = new Register(this);
             while (currentStep != null)
             {

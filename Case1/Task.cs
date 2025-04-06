@@ -23,16 +23,16 @@ namespace Case1
     {
 
         [XmlAttribute("ProjectId")]
-        public string ProjectId { get; set; }
+        public string ProjectId { get; set; } = string.Empty;
         [XmlElement("Name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [XmlArray("AssignedUsers")]
         [XmlArrayItem("User")]
         public List<string> AssignedUsers { get; set; } = new List<string>();
         [XmlElement("Description")]
 
-        public string Description { get; set; }
-        public TaskStatus Status { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public TaskStatus Status { get; set; } = TaskStatus.ToDo;
         public override string ToString()
         {
             string res = "ProjectId: " + ProjectId +  " Name: " + Name + " AssignedUsers: ";

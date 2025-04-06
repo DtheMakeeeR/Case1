@@ -3,7 +3,7 @@
 	<Task>
 		<Name>Make coffee</Name>
 		<AssignedUsers>
-			<User>2</User>
+			<User>Иван</User>
 		</AssignedUsers>
 		<Description>You know how we do it!</Description>
 		<Status>ToDo</Status>
