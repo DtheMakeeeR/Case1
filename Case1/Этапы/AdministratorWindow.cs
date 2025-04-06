@@ -76,6 +76,7 @@ namespace Case1
                     input = Console.ReadLine();
                     system.AssingUser(tIndex, input);
                 }
+                else throw new Exception("Некорректный ввод! ");
 
             }
             catch (Exception e)
